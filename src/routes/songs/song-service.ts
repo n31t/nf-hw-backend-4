@@ -33,6 +33,16 @@ class SongService {
     await song.save();
     return song;
   }
+
+    async updateSongImageUrl(id: string, img: string): Promise<ISong | null> {
+        const song = await Song.findById(id);
+        if (!song) {
+            return null;
+        }
+        song.img = img;
+        await song.save();
+        return song;
+    }
 }
 
 export default SongService;

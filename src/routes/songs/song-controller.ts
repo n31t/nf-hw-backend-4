@@ -50,6 +50,53 @@ class SongController {
         res.status(500).send({ error: error.message });
     }
   }
+
+//   uploadSongImage = async (req: Request, res: Response): Promise<void> => {
+//     try{
+//         const { id } = req.params;
+//         const busboy = new Busboy({ headers: req.headers});
+
+//         busboy.on('file', async (fieldname, file, filename, encoding, mimetype) => {
+//             const url = await uploadFile('nf-spotify-hw', filename, file);
+//             console.log('File uploaded successfully');
+//             const updatedSong = await this.songService.updateSongImageUrl(id, url);
+
+//             if (!updatedSong) {
+//               res.status(404).json({ message: 'Song not found' });
+//               return;
+//             }
+      
+//             res.status(201).json({ message: 'File uploaded successfully', song: updatedSong })
+//         });
+//         return req.pipe(busboy);
+//     }
+//     catch (error: any) {
+//         res.status(500).send({ error: error.message });
+//     }
+//     }
+    uploadSongImage = async (req: Request, res: Response): Promise<void> => {
+    try{
+        const { id } = req.params;
+        const busboy = new Busboy({ headers: req.headers});
+
+        busboy.on('file', async (fieldname, file, filename, encoding, mimetype) => {
+            const url = await uploadFile('nf-spotify-hw', filename, file);
+            console.log('File uploaded successfully');
+            const updatedSong = await this.songService.updateSongImageUrl(id, url);
+
+            if (!updatedSong) {
+              res.status(404).json({ message: 'Song not found' });
+              return;
+            }
+      
+            res.status(201).json({ message: 'File uploaded successfully', song: updatedSong })
+        });
+        return req.pipe(busboy);
+    }
+    catch (error: any) {
+        res.status(500).send({ error: error.message });
+    }
+  }
   getSongs = async (req: Request, res: Response): Promise<void> => {
     try {
       const songs = await this.songService.getAllSongs();

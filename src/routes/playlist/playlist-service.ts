@@ -62,6 +62,16 @@ class PlaylistService {
 
         return await Playlist.findByIdAndUpdate(playlistId, { $pull: { songs: songObjectId } }, { new: true }).exec();
     }
+
+    async updatePlaylistImg(id: string, img: string): Promise<IPlaylist | null> {
+        const playlist = await Playlist.findById(id);
+        if (!playlist) {
+            return null;
+        }
+        playlist.img = img;
+        await playlist.save();
+        return playlist;
+    }
 }
 
 export default PlaylistService;

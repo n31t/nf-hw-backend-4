@@ -17,4 +17,6 @@ authRouter.get('/protected', authMiddleware, (req, res) => {
   res.json({ message: 'You have access to this route!' })
 })
 
+authRouter.post('/:id/upload-avatar', authMiddleware, authController.uploadAvatar)
+
 export default authRouter

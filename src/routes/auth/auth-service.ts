@@ -105,6 +105,16 @@ class AuthService {
 
     return { accessToken: newAccessToken, refreshToken: newRefreshToken }
   }
+
+  async updateAvatar(userId: string, avatar: string): Promise<IUser | null> {
+    const user = await UserModel.findById(userId)
+    if (!user) {
+      return null
+    }
+    user.avatar = avatar
+    await user.save()
+    return user
+  }
 }
 
 export default AuthService

@@ -2,6 +2,8 @@ import { PlaylistDto } from "./dtos/Playlist.dto";
 import { IPlaylist } from "./models/Playlist";
 import PlaylistService from "./playlist-service";
 import { Request, Response } from 'express';
+import { uploadFile } from "../../middlewares/s3-middleware";
+import Busboy from 'busboy';
 
 class PlaylistController {
   private playlistService: PlaylistService;
@@ -110,6 +112,30 @@ class PlaylistController {
         }
     } 
     }
+
+    uploadPlaylistImage = async (req: Request, res: Response): Promise<void> => {
+        try{
+            const { id } = req.params;
+            const busboy = new Busboy({ headers: req.headers});
+    
+            busboy.on('file', async (fieldname, file, filename, encoding, mimetype) => {
+                const url = await uploadFile('nf-spotify-hw', filename, file);
+                console.log('File uploaded successfully');
+                const updatedPlaylist = await this.playlistService.updatePlaylistImg(id, url);
+    
+                if (!updatedPlaylist) {
+                  res.status(404).json({ message: 'Playlist not found' });
+                  return;
+                }
+                res.status(201).json({ message: 'File uploaded successfully', playlist: updatedPlaylist })
+            });
+            return req.pipe(busboy);
+        }
+        catch (error: any) {
+            res.status(500).send({ error: error.message });
+        }
+      }
+    
 }
 
 export default PlaylistController;

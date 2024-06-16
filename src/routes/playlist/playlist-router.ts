@@ -15,4 +15,6 @@ playlistRouter.delete('/:id', authMiddleware, playlistController.deletePlaylist)
 playlistRouter.post('/:id/song', authMiddleware, playlistController.addSongToPlaylist);
 playlistRouter.delete('/:id/song', authMiddleware, playlistController.removeSongFromPlaylist);
 
+playlistRouter.post('/:id/upload-image', authMiddleware, playlistController.uploadPlaylistImage);
+
 export default playlistRouter;
