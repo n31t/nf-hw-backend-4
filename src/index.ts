@@ -5,14 +5,25 @@ import connectDB from './db'
 import globalRouter from './routes/global-router'
 import { logger } from './logger'
 import { createBucket, deleteBucket, listBuckets, putFile, uploadFile } from './middlewares/s3-middleware'
+import cors from 'cors'
 
 connectDB()
 
 const app = express()
 
+app.use(cors({
+  origin: 'http://localhost:3006',
+  methods: ['GET', 'POST'],
+  allowedHeaders: '*', 
+  exposedHeaders: '*',
+  credentials: true
+}));
+
 app.use(express.json())
 app.use(logger)
 app.use('/api/v5', globalRouter)
+
+
 
 const server = createServer(app)
 
