@@ -37,7 +37,7 @@ export const CreatePlaylist = () => {
         img: ''
       };
 
-      const response = await axios.post('http://nf-hw-backend-4-xm1l.onrender.com/api/v5/playlists', playlistData, {
+      const response = await axios.post('https://nf-hw-backend-4-xm1l.onrender.com/api/v5/playlists', playlistData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@ export const CreatePlaylist = () => {
         const imageFormData = new FormData();
         imageFormData.append('image', img);
 
-        const imageResponse = await axios.post(`http://nf-hw-backend-4-xm1l.onrender.com/api/v5/playlists/${response.data._id}/upload-image`, imageFormData, {
+        const imageResponse = await axios.post(`https://nf-hw-backend-4-xm1l.onrender.com/api/v5/playlists/${response.data._id}/upload-image`, imageFormData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${token}`

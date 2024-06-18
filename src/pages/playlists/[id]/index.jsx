@@ -32,7 +32,7 @@ export const CreateSong = () => {
 
   const fetchPlaylist = async () => {
     try {
-      const response = await axios.get(`http://nf-hw-backend-4-xm1l.onrender.com/api/v5/playlists/${playlistId}`, {
+      const response = await axios.get(`https://nf-hw-backend-4-xm1l.onrender.com/api/v5/playlists/${playlistId}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ export const CreateSong = () => {
   const fetchSongs = async () => {
     try {
       const songPromises = playlist.songs.map(songId =>
-        axios.get(`http://nf-hw-backend-4-xm1l.onrender.com/api/v5/songs/${songId}`, {
+        axios.get(`https://nf-hw-backend-4-xm1l.onrender.com/api/v5/songs/${songId}`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ export const CreateSong = () => {
         url: defaultSong
       };
 
-      const response = await axios.post(`http://nf-hw-backend-4-xm1l.onrender.com/api/v5/songs`, songData, {
+      const response = await axios.post(`https://nf-hw-backend-4-xm1l.onrender.com/api/v5/songs`, songData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -103,7 +103,7 @@ export const CreateSong = () => {
         const imgFormData = new FormData();
         imgFormData.append('image', img);
 
-        const imgUploadResponse = await axios.post(`http://nf-hw-backend-4-xm1l.onrender.com/api/v5/songs/${songId}/upload-image`, imgFormData, {
+        const imgUploadResponse = await axios.post(`https://nf-hw-backend-4-xm1l.onrender.com/api/v5/songs/${songId}/upload-image`, imgFormData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${token}`,
@@ -117,7 +117,7 @@ export const CreateSong = () => {
         const songFormData = new FormData();
         songFormData.append('url', url);
 
-        const songUploadResponse = await axios.post(`http://nf-hw-backend-4-xm1l.onrender.com/api/v5/songs/${songId}/upload`, songFormData, {
+        const songUploadResponse = await axios.post(`https://nf-hw-backend-4-xm1l.onrender.com/api/v5/songs/${songId}/upload`, songFormData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${token}`,
@@ -127,7 +127,7 @@ export const CreateSong = () => {
         console.log('Song uploaded successfully:', songUploadResponse.data);
       }
 
-      const playlistResponse = await axios.put(`http://nf-hw-backend-4-xm1l.onrender.com/api/v5/playlists/${playlistId}`, {
+      const playlistResponse = await axios.put(`https://nf-hw-backend-4-xm1l.onrender.com/api/v5/playlists/${playlistId}`, {
         songs: [...playlist.songs, songId],
       }, {
         headers: {

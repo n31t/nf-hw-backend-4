@@ -43,7 +43,7 @@ export const Profile = () => {
     event.preventDefault();
     try {
       // Update username
-      const usernameResponse = await axios.put(`http://nf-hw-backend-4-xm1l.onrender.com/api/v5/auth/users/${userId}/username`, {
+      const usernameResponse = await axios.put(`https://nf-hw-backend-4-xm1l.onrender.com/api/v5/auth/users/${userId}/username`, {
         username
       }, {
         headers: {
@@ -59,7 +59,7 @@ export const Profile = () => {
         const formData = new FormData();
         formData.append('avatar', selectedFile);
     
-        const avatarResponse = await axios.put(`http://nf-hw-backend-4-xm1l.onrender.com/api/v5/auth/users/${userId}/image`, formData, {
+        const avatarResponse = await axios.put(`https://nf-hw-backend-4-xm1l.onrender.com/api/v5/auth/users/${userId}/image`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${token}`

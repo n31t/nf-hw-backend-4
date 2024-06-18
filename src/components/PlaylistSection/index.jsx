@@ -8,7 +8,7 @@ export const Playlistsection = ({ title }) => {
 
   useEffect(() => {
     const fetchPlaylists = async () => {
-      const response = await axios.get('http://nf-hw-backend-4-xm1l.onrender.com/api/v5/playlists');
+      const response = await axios.get('https://nf-hw-backend-4-xm1l.onrender.com/api/v5/playlists');
       setPlaylists(response.data);
     };
 

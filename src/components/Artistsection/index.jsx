@@ -10,7 +10,7 @@ export const Artistsection = ({ title }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://nf-hw-backend-4-xm1l.onrender.com/api/v5/auth/users');
+        const response = await axios.get('https://nf-hw-backend-4-xm1l.onrender.com/api/v5/auth/users');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);

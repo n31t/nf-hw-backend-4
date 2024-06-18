@@ -22,7 +22,7 @@ export const Signup = () => {
     event.preventDefault();
   
     try {
-      const response = await axios.post('http://nf-hw-backend-4-xm1l.onrender.com/api/v5/auth/register', {
+      const response = await axios.post('https://nf-hw-backend-4-xm1l.onrender.com/api/v5/auth/register', {
         email,
         password,
         avatar,
