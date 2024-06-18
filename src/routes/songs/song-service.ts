@@ -43,6 +43,13 @@ class SongService {
         await song.save();
         return song;
     }
+
+    async searchSongsByKeywords(keywords: string): Promise<ISong[]> {
+      const keywordArray = keywords.split(' ');
+      const queryArray = keywordArray
+      .map(keyword => ({ name: { $regex: keyword, $options: 'i' } }));
+      return await Song.find({ $or: queryArray }).exec();
+    }
 }
 
 export default SongService;

@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
+import { ObjectId } from "mongoose";
 import Joi from "joi";
 
 export interface ISong extends mongoose.Document {
     name: string;
-    artist: string;
+    artist: ObjectId;
     song: string;
     img: string;
     url: string;

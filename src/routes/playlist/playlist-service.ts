@@ -6,7 +6,7 @@ import SongService from "../songs/song-service";
 const songService = new SongService();
 
 class PlaylistService {
-    async createPlaylist(playlist: PlaylistDto): Promise<IPlaylist> {
+    async createPlaylist(playlist: IPlaylist): Promise<IPlaylist> {
         const newPlaylist = new Playlist(playlist);
         await newPlaylist.save();
         return newPlaylist;

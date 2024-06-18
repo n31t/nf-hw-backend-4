@@ -1,5 +1,5 @@
 import { CreateUserDto } from './dtos/CreateUser.dto'
-import { IUser } from './models/User'
+import User, { IUser } from './models/User'
 import UserModel from './models/User'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
@@ -115,6 +115,39 @@ class AuthService {
     await user.save()
     return user
   }
+
+  async getUserByToken(token: string): Promise<IUser | null> {
+    const payload = this.verifyJwt(token)
+    if (!payload) return null
+  
+    const user = await UserModel.findById(payload.id)
+    return user
+  }
+
+  async getAllUsers(): Promise<IUser[]> {
+    return await UserModel.find({}).exec()
+  }
+
+  async getUserById(id: string): Promise<IUser | null> {
+    return await UserModel.findById(id)
+  }
+
+  async searchUsersByKeywords(keywords: string): Promise<IUser[]> {
+    const keywordArray = keywords.split(' ');
+    const queryArray = keywordArray.map(keyword => ({ username: { $regex: keyword, $options: 'i' } }));
+    return await User.find({ $or: queryArray }).exec();
+  }
+
+  async updateUsername(userId: string, username: string): Promise<IUser | null> {
+    const user = await UserModel.findById(userId)
+    if (!user) {
+      return null
+    }
+    user.username = username
+    await user.save()
+    return user
+  }
+  
 }
 
 export default AuthService

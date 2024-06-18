@@ -16,4 +16,6 @@ songRouter.delete('/:id', authMiddleware, songController.deleteSong);
 songRouter.post('/:id/upload', authMiddleware, songController.uploadSong);
 songRouter.post('/:id/upload-image', authMiddleware, songController.uploadSongImage);
 
+songRouter.post('/search/keywords', songController.searchSongs);
+
 export default songRouter;

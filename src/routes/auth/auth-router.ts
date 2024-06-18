@@ -12,11 +12,17 @@ authRouter.post('/register', authController.registerUser)
 authRouter.post('/login', authController.loginUser)
 authRouter.post('/refresh-token', authController.refreshToken)
 
+authRouter.get('/users', authController.getAllUsers)
+authRouter.get('/users/:id', authController.getUserById)
+authRouter.put('/users/:id/image', authController.uploadAvatar)
+authRouter.put('/users/:id/username', authController.updateUsername)
+authRouter.post('/users/search/keywords', authController.searchUsersByKeywords)
+
 // Example protected route
 authRouter.get('/protected', authMiddleware, (req, res) => {
   res.json({ message: 'You have access to this route!' })
 })
 
-authRouter.post('/:id/upload-avatar', authMiddleware, authController.uploadAvatar)
+
 
 export default authRouter

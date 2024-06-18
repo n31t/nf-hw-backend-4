@@ -71,6 +71,74 @@ class AuthController {
         res.status(500).send({ error: error.message });
     }
   }
+  getUserByToken = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { token } = req.body
+      if(!token){
+        res.status(401).json({ message: 'No token provided' })
+        return
+      }
+      const user = await this.authService.getUserByToken(token)
+      if (!user) {
+        res.status(401).json({ message: 'Invalid token' })
+        return
+      }
+      res.status(200).json(user)
+    } catch (err) {
+      res.status(500).json({ message: 'Error getting user' })
+    }
+  }
+
+  getUserById = async (req : Request, res : Response): Promise<void> => {
+    try {
+      const { id } = req.params
+      const user = await this.authService.getUserById(id)
+      if (!user) {
+        res.status(404).json({ message: 'User not found' })
+        return
+      }
+      res.status(200).json(user)
+    }
+    catch (err) {
+      res.status(500).json({ message: 'Error getting user' })
+    }
+  }
+
+  getAllUsers = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const users = await this.authService.getAllUsers()
+      res.status(200).json(users)
+    } catch (err) {
+      res.status(500).json({ message: 'Error getting users' })
+    }
+  }
+
+  updateUsername = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params
+      const { username } = req.body
+      const user = await this.authService.updateUsername(id, username)
+      if (!user) {
+        res.status(404).json({ message: 'User not found' })
+        return
+      }
+      res.status(200).json(user)
+    } catch (err) {
+      res.status(500).json({ message: 'Error updating user' })
+    }
+  }
+
+  
+
+  searchUsersByKeywords = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { keywords } = req.body
+      const users = await this.authService.searchUsersByKeywords(keywords)
+      res.status(200).json(users)
+    } catch (err) {
+      res.status(500).json({ message: 'Error searching users' })
+    }
+  }
 }
 
 export default AuthController
