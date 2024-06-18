@@ -12,7 +12,7 @@ connectDB()
 const app = express()
 
 app.use(cors({
-  origin: 'https://nf-hw-backend-4-omega.vercel.app/',
+  origin: 'https://nf-hw-backend-4-omega.vercel.app',
   methods: ['GET', 'POST','PUT', 'DELETE'],
   allowedHeaders: '*', 
   exposedHeaders: '*',
