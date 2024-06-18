@@ -20,7 +20,7 @@ export const UserPage = () => {
 
   const fetchUserData = async () => {
     try {
-      const userResponse = await axios.get(`http://localhost:3000/api/v5/auth/users/${userId}`, {
+      const userResponse = await axios.get(`http://nf-hw-backend-4-xm1l.onrender.com/api/v5/auth/users/${userId}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -42,7 +42,7 @@ export const UserPage = () => {
 
   const fetchUserSongs = async (userId) => {
     try {
-      const songsResponse = await axios.get(`http://localhost:3000/api/v5/songs`, {
+      const songsResponse = await axios.get(`http://nf-hw-backend-4-xm1l.onrender.com/api/v5/songs`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
