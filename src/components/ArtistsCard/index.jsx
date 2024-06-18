@@ -2,17 +2,17 @@ import React from "react";
 import { RiPlayFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-export const ArtistsCard = ({ title, description, imageUrl }) => {
+export const ArtistsCard = ({ title, description, imageUrl, link }) => {
   return (
     <Link
-      to="#"
+    to = {`/users/${link}`}
       className="bg-main-lg rounded-lg p-4 hover:bg-main-lgHover transition-all group"
     >
       <div className="mb-4 relative flex justify-center items-center">
         <img
           src={imageUrl}
           alt="Artist"
-          className="w-48 h-48 rounded-full drop-shadow-2xl"
+          className="w-32 h-32 rounded-full drop-shadow-xl"
         />
         <button className="p-3 text-3xl bg-main-green rounded-full text-gray absolute right-4 bottom-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 ease-out bg-[#65D46E] text-black">
           <RiPlayFill />

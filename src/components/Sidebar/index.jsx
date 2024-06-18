@@ -42,7 +42,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             </li>
             <li>
               <Link
-                to="#"
+                to="/search"
                 className="flex items-center gap-4 hover:text-gray-100 transition-colors"
               >
                 <HiMagnifyingGlass className="text-2xl" /> Search
@@ -58,7 +58,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             </li>
             <li>
               <Link
-                to="#"
+                to="/create-playlist"
                 className="flex items-center gap-4 hover:text-gray-100 transition-colors"
               >
                 <RiAddBoxLine className="text-2xl" /> Create a Playlist

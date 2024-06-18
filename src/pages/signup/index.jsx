@@ -1,11 +1,42 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [avatar, setAvatar] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2FoNFztYrjisKytpNypxcpYf_tQqGme8q5Q&s");
+  const [username, setUsername] = useState("no-name")
+  const [location, setLocation] = useState("KZ")
+
+  const navigate = useNavigate()
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    try {
+      const response = await axios.post('http://localhost:3000/api/v5/auth/register', {
+        email,
+        password,
+        avatar,
+        username,
+        location
+      });
+
+      console.log('Registration successful');
+      console.log(response)
+      navigate('/'); // navigate to login
+    } catch (error) {
+      // Registration failed
+      console.error(error.response.data.message);
+    }
   };
 
   return (
@@ -19,11 +50,13 @@ export const Signup = () => {
           />
           <h1 className="text-3xl font-bold mt-4">Sign Up</h1>
         </div>
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium">Email</label>
             <input
               type="email"
+              value={ email }
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full p-3 mt-1 text-black rounded-lg border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
               placeholder="Enter your email"
             />
@@ -33,6 +66,8 @@ export const Signup = () => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
+                value = { password }
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full p-3 mt-1 text-black rounded-lg border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
                 placeholder="Create a password"
               />
@@ -70,7 +105,7 @@ export const Signup = () => {
           >
             Sign Up
           </button>
-        </form>
+        </form >
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-400">
             Already have an account?{" "}

@@ -2,10 +2,9 @@ import React from "react";
 import { RiPlayFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-export const PlaylistsCard = ({ title, description, imageUrl }) => {
+export const PlaylistsCard = ({ title, description, imageUrl, link }) => {
   return (
-    <Link
-      to="#"
+    <Link to={`/playlists/${link}`}
       className="bg-main-lg rounded-lg p-4 hover:bg-main-lgHover transition-all group w-60"
     >
       <div className="mb-4 relative flex justify-center items-center">

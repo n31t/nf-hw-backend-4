@@ -7,6 +7,9 @@ import {
 import { Link } from "react-router-dom";
 
 const Header = ({ setShowSidebar }) => {
+  const token = localStorage.getItem('token'); // replace 'token' with the key you use to store the token
+  const avatar = localStorage.getItem('avatar'); // replace 'avatar' with the key you use to store the avatar URL
+
   return (
     <header className="fixed left-0 top-0 md:ml-64 w-full md:w-[calc(100%-256px)] bg-[#0A0A0A]/90 flex items-center justify-between p-4 z-40">
       <div>
@@ -20,15 +23,23 @@ const Header = ({ setShowSidebar }) => {
         </div>
       </div>
       <div className="flex items-center gap-6">
-        <Link to="/signup" className="hover:text-white transition-colors">
-          Sign Up
-        </Link>
-        <Link
-          to="/signin"
-          className="py-2 md:py-3 px-4 rounded-full text-side-bub bg-white font-medium hover:scale-105 transition-transform text-black"
-        >
-          Sign In
-        </Link>
+        {token ? (
+          <Link to="/profile"> 
+          <img src={avatar} alt="User avatar" className="rounded-full w-8 h-8" /> 
+          </Link>
+        ) : (
+          <>
+            <Link to="/signup" className="hover:text-white transition-colors">
+              Sign Up
+            </Link>
+            <Link
+              to="/signin"
+              className="py-2 md:py-3 px-4 rounded-full text-side-bub bg-white font-medium hover:scale-105 transition-transform text-black"
+            >
+              Sign In
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );

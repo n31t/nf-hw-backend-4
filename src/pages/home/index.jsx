@@ -15,9 +15,6 @@ export const Home = () => {
       <div className="bg-custom-section pt-28 md:pl-72 p-8">
         <Artistsection></Artistsection>
         <Playlistsection></Playlistsection>
-        <Playlistsection></Playlistsection>
-        <Playlistsection></Playlistsection>
-        <Playlistsection></Playlistsection>
         <Footer></Footer>
       </div>
     </div>
